@@ -1,6 +1,5 @@
 package com.shoppingcart.model;
 
-import com.sun.deploy.util.StringUtils;
 
 import java.io.Serializable;
 
