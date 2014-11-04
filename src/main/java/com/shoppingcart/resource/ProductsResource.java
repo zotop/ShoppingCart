@@ -2,6 +2,7 @@ package com.shoppingcart.resource;
 
 import com.shoppingcart.model.Product;
 import com.shoppingcart.service.DatabaseService;
+import com.sun.jmx.remote.internal.Unmarshal;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.ObjectMapper;
 

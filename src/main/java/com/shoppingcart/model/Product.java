@@ -1,56 +1,56 @@
 package com.shoppingcart.model;
 
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * Product representation
  */
+
 public class Product implements Serializable {
-    private String id;
-    private String name;
-    private Double priceIncVat;
-    private Double vatPercentage;
+    public String id;
+    public String name;
+    public Double priceIncVat;
+    public Double vatPercentage;
+    public Double vatAmount;
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Double getPriceIncVat() {
         return priceIncVat;
-    }
-
-    public void setPriceIncVat(Double priceIncVat) {
-        this.priceIncVat = priceIncVat;
     }
 
     public Double getVatPercentage() {
         return vatPercentage;
     }
 
-    public void setVatPercentage(Double vatPercentage) {
-        this.vatPercentage = vatPercentage;
-    }
-
-    @JsonProperty("vatAmount")
+    @XmlElement(name="vatAmount")
     public Double getVatAmount() {
         return priceIncVat * vatPercentage;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPriceIncVat(Double priceIncVat) {
+        this.priceIncVat = priceIncVat;
+    }
+
+    public void setVatPercentage(Double vatPercentage) {
+        this.vatPercentage = vatPercentage;
+    }
 }

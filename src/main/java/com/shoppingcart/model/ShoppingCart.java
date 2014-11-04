@@ -1,8 +1,8 @@
 package com.shoppingcart.model;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 
+
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  *
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+
 public class ShoppingCart implements Serializable {
 
     private String id;
@@ -26,7 +26,7 @@ public class ShoppingCart implements Serializable {
         this.id = id;
     }
 
-    @JsonProperty("totalVatAmount")
+
     public Double getTotalVatAmount() {
         totalVatAmount = 0.0;
         for(ShoppingCartItem shoppingCartItem : rows) {
@@ -36,7 +36,7 @@ public class ShoppingCart implements Serializable {
         return totalVatAmount;
     }
 
-    @JsonProperty("totalPriceIncVatAmount")
+
     public Double getTotalPriceIncVatAmount() {
         totalPriceIncVatAmount = 0.0;
         for(ShoppingCartItem shoppingCartItem : rows) {
@@ -45,7 +45,7 @@ public class ShoppingCart implements Serializable {
         return totalPriceIncVatAmount;
     }
 
-    @JsonProperty("rows")
+
     public List<ShoppingCartItem> getRows() {
         return rows;
     }

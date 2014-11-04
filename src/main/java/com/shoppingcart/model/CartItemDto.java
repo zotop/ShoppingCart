@@ -1,10 +1,13 @@
 package com.shoppingcart.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  */
+
 public class CartItemDto {
 
 
@@ -12,7 +15,7 @@ public class CartItemDto {
 
     private Double quantity;
 
-    @JsonProperty("productId")
+
     public String getProductId() {
         return productId;
     }
@@ -21,7 +24,7 @@ public class CartItemDto {
         this.productId = productId;
     }
 
-    @JsonProperty("quantity")
+
     public Double getQuantity() {
         return quantity;
     }
