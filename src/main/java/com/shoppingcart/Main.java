@@ -2,6 +2,12 @@ package com.shoppingcart;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.glassfish.jersey.moxy.json.MoxyJsonConfig;
+import org.glassfish.jersey.server.ResourceConfig;
+
+import javax.ws.rs.ext.ContextResolver;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class launches the web application in an embedded Jetty container. This is the entry point to your application. The Java
@@ -36,5 +42,19 @@ public class Main {
 
         server.start();
         server.join();
+    }
+
+    public static ResourceConfig createApp() {
+        return new ResourceConfig().
+                packages("com.shoppingcart").
+                register(createMoxyJsonResolver());
+    }
+
+    public static ContextResolver<MoxyJsonConfig> createMoxyJsonResolver() {
+        final MoxyJsonConfig moxyJsonConfig = new MoxyJsonConfig();
+        Map<String, String> namespacePrefixMapper = new HashMap<String, String>(1);
+        namespacePrefixMapper.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
+        moxyJsonConfig.setNamespacePrefixMapper(namespacePrefixMapper).setNamespaceSeparator(':');
+        return moxyJsonConfig.resolver();
     }
 }
