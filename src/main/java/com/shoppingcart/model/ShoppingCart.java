@@ -1,14 +1,11 @@
 package com.shoppingcart.model;
 
-
-
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Shopping Cart
  */
 
 public class ShoppingCart implements Serializable {
@@ -25,7 +22,6 @@ public class ShoppingCart implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public Double getTotalVatAmount() {
         totalVatAmount = 0.0;
@@ -44,7 +40,6 @@ public class ShoppingCart implements Serializable {
         }
         return totalPriceIncVatAmount;
     }
-
 
     public List<ShoppingCartItem> getRows() {
         return rows;

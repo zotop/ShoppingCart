@@ -3,10 +3,12 @@ package com.shoppingcart.model;
 
 
 
+import org.codehaus.jackson.annotate.JsonUnwrapped;
+
 import java.io.Serializable;
 
 /**
- *
+ * Representation of the products added to a cart and its quantity
  */
 
 public class ShoppingCartItem implements Serializable {
@@ -18,12 +20,15 @@ public class ShoppingCartItem implements Serializable {
         this.quantity = quantity;
     }
 
+    @JsonUnwrapped
     public Product getProduct() {
         return product;
     }
+
     public Double getQuantity() {
         return quantity;
     }
+
     public Double getPriceIncVatAmount()
     {
         return quantity * product.getPriceIncVat();

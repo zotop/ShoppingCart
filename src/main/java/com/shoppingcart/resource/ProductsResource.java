@@ -34,20 +34,20 @@ public class ProductsResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Product> getProductList() {
-        return DatabaseService.getProductList();
+    public String getProductList() throws IOException {
+        return new ObjectMapper().writeValueAsString(DatabaseService.getProductList());
     }
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Product getProduct(@PathParam("id") String productId) throws IOException {
+    public String getProduct(@PathParam("id") String productId) throws IOException {
         Product product = DatabaseService.getProduct(productId);
         if(product == null) {
             throw new NotFoundException();
         }
 
-        return product;
+        return new ObjectMapper().writeValueAsString(product);
     }
 
     @PUT

@@ -27,8 +27,8 @@ public class ShoppingCartsResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ShoppingCart> getShoppingCartList() {
-        return DatabaseService.getShoppingCartList();
+    public String getShoppingCartList() throws IOException {
+        return new ObjectMapper().writeValueAsString(DatabaseService.getShoppingCartList());
     }
 
     @POST
@@ -55,15 +55,13 @@ public class ShoppingCartsResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ShoppingCart getCart(@PathParam("id") String cartId) throws IOException {
+    public String getCart(@PathParam("id") String cartId) throws IOException {
         ShoppingCart shoppingCart = DatabaseService.getShoppingCart(cartId);
         if(shoppingCart == null) {
             throw new NotFoundException();
         }
         System.out.println(new ObjectMapper().writeValueAsString(shoppingCart));
-
-        return shoppingCart;
-        //return new ObjectMapper().writeValueAsString(shoppingCart);
+        return new ObjectMapper().writeValueAsString(shoppingCart);
     }
 
 

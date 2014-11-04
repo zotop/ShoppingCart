@@ -1,9 +1,6 @@
 package com.shoppingcart.model;
 
 
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -33,7 +30,6 @@ public class Product implements Serializable {
         return vatPercentage;
     }
 
-    @XmlElement(name="vatAmount")
     public Double getVatAmount() {
         return priceIncVat * vatPercentage;
     }
