@@ -33,7 +33,7 @@ public class ProductsResourceTest extends JerseyTest {
     public void create_product() {
         Product product = initProduct();
         Response response = createProduct(product);
-        assertEquals(response.getStatus(), 200);
+        assertEquals(response.getStatus(), 201);
     }
 
     @Test

@@ -2,9 +2,17 @@ package com.shoppingcart.resource;
 
 import com.shoppingcart.model.Product;
 import com.shoppingcart.service.DatabaseService;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.ws.rs.*;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -16,10 +24,11 @@ public class ProductsResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public String createProduct(Product product) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createProduct(Product product, @Context UriInfo uriInfo) {
         DatabaseService.saveProduct(product);
-        return "Product Created";
+        URI uri = uriInfo.getAbsolutePathBuilder().path(product.getId()).build();
+        return Response.created(uri).build();
     }
 
     @GET
@@ -31,22 +40,37 @@ public class ProductsResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Product getProduct(@PathParam("id") String productId) {
-        return DatabaseService.getProduct(productId);
+    public Product getProduct(@PathParam("id") String productId) throws IOException {
+        Product product = DatabaseService.getProduct(productId);
+        if(product == null) {
+            throw new NotFoundException();
+        }
+
+        return product;
     }
 
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateProduct(@PathParam("id") String productId, Product product) {
+    public Response updateProduct(@PathParam("id") String productId, Product product, @Context UriInfo uriInfo) {
+        if(DatabaseService.getProduct(productId) == null) {
+            throw new NotFoundException();
+        }
         DatabaseService.saveProduct(product);
+        URI uri = uriInfo.getAbsolutePathBuilder().path(productId).build();
+        return Response.noContent().location(uri).build();
     }
 
 
     @DELETE
     @Path("{id}")
-    public void deleteProduct(@PathParam("id") String productId) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteProduct(@PathParam("id") String productId) {
+        if(DatabaseService.getProduct(productId) == null) {
+            throw new NotFoundException();
+        }
         DatabaseService.deleteProduct(productId);
+        return Response.ok().build();
     }
 
 }

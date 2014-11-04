@@ -1,13 +1,15 @@
 package com.shoppingcart.model;
 
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import java.io.Serializable;
 
 /**
  * Product representation
  */
-public class Product implements Serializable, Comparable {
-
+public class Product implements Serializable {
     private String id;
     private String name;
     private Double priceIncVat;
@@ -45,13 +47,10 @@ public class Product implements Serializable, Comparable {
         this.vatPercentage = vatPercentage;
     }
 
+    @JsonProperty("vatAmount")
     public Double getVatAmount() {
         return priceIncVat * vatPercentage;
     }
 
-    @Override
-    public int compareTo(Object product) {
-       Product p = (Product) product;
-       return getName().compareTo(p.getName());
-    }
+
 }
