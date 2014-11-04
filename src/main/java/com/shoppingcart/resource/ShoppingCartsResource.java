@@ -60,7 +60,6 @@ public class ShoppingCartsResource {
         if(shoppingCart == null) {
             throw new NotFoundException();
         }
-        System.out.println(new ObjectMapper().writeValueAsString(shoppingCart));
         return new ObjectMapper().writeValueAsString(shoppingCart);
     }
 
