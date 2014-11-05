@@ -26,7 +26,7 @@ public class ShoppingCart implements Serializable {
     public Double getTotalVatAmount() {
         totalVatAmount = 0.0;
         for(ShoppingCartItem shoppingCartItem : rows) {
-            totalVatAmount += shoppingCartItem.getQuantity() * shoppingCartItem.getProduct().getVatAmount() ;
+            totalVatAmount += shoppingCartItem.getVatAmount() ;
         }
 
         return totalVatAmount;
@@ -36,7 +36,7 @@ public class ShoppingCart implements Serializable {
     public Double getTotalPriceIncVatAmount() {
         totalPriceIncVatAmount = 0.0;
         for(ShoppingCartItem shoppingCartItem : rows) {
-            totalPriceIncVatAmount += shoppingCartItem.getQuantity() * shoppingCartItem.getProduct().getPriceIncVat();
+            totalPriceIncVatAmount += shoppingCartItem.getQuantity() * shoppingCartItem.getPriceIncVat();
         }
         return totalPriceIncVatAmount;
     }

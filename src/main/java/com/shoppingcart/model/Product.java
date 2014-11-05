@@ -8,11 +8,11 @@ import java.io.Serializable;
  */
 
 public class Product implements Serializable {
-    public String id;
-    public String name;
-    public Double priceIncVat;
-    public Double vatPercentage;
-    public Double vatAmount;
+    private String id;
+    private String name;
+    private Double priceIncVat;
+    private Double vatPercentage;
+
 
     public String getId() {
         return id;
