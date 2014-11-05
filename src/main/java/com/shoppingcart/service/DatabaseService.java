@@ -63,4 +63,9 @@ public class DatabaseService {
         shoppingCart.addItem(new ShoppingCartItem(product, quantity));
         shoppingCartMap.put(shoppingCartId, shoppingCart);
     }
+
+    public static void clear() {
+        productMap.clear();
+        shoppingCartMap.clear();
+    }
 }

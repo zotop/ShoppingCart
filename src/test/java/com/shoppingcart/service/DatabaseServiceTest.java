@@ -18,6 +18,7 @@ public class DatabaseServiceTest {
 
     @Before
     public void setup() {
+        DatabaseService.clear();
         initProduct();
         DatabaseService.saveProduct(product);
     }

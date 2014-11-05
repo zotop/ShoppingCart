@@ -1,11 +1,13 @@
 package com.shoppingcart.resource;
 
 import com.shoppingcart.model.Product;
+import com.shoppingcart.service.DatabaseService;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
@@ -27,6 +29,11 @@ public class ProductsResourceTest extends JerseyTest {
     @Override
     protected Application configure() {
         return new ResourceConfig(ProductsResource.class);
+    }
+
+    @Before
+    public void setup() {
+        DatabaseService.clear();
     }
 
     @Test
@@ -67,8 +74,6 @@ public class ProductsResourceTest extends JerseyTest {
         ObjectMapper mapper = new ObjectMapper();
         List<Product> productList = mapper.readValue(jsonResponse, TypeFactory.defaultInstance().constructCollectionType(List.class, Product.class));
         assertEquals(productList.size(), 1);
-        assertEquals(productList.get(0).getId(), "2");
-
     }
 
     @Test
@@ -81,8 +86,6 @@ public class ProductsResourceTest extends JerseyTest {
         ObjectMapper mapper = new ObjectMapper();
         List<Product> productList = mapper.readValue(jsonResponse, TypeFactory.defaultInstance().constructCollectionType(List.class, Product.class));
         assertEquals(productList.size(), 2);
-        assertEquals(productList.get(0).getId(), "1");
-        assertEquals(productList.get(1).getId(), "2");
     }
 
     private Response createProduct(Product product) {

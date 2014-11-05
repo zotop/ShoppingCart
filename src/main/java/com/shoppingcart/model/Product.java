@@ -12,6 +12,7 @@ public class Product implements Serializable {
     private String name;
     private Double priceIncVat;
     private Double vatPercentage;
+    private Double vatAmount;
 
 
     public String getId() {
@@ -49,4 +50,5 @@ public class Product implements Serializable {
     public void setVatPercentage(Double vatPercentage) {
         this.vatPercentage = vatPercentage;
     }
+
 }
